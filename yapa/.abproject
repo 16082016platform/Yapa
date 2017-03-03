@@ -1,0 +1,28 @@
+{
+  "ProjectName": "yapa",
+  "ProjectGuid": "7e47f253-d0f1-4aad-babe-f0c0b1423916",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.yapa",
+  "DisplayName": "yapa",
+  "Author": "",
+  "Description": "yapa",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{F0A65104-D4F4-4012-B799-F612D75820F6}",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "Default",
+  "FrameworkVersion": "2.5.0",
+  "Framework": "NativeScript"
+}
