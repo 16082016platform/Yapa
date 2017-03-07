@@ -1,3 +1,6 @@
+ActionBar{
+    height: 0;
+}
 .km-icon {
     font-family: 'kendoui';
     vertical-align: center;
@@ -154,3 +157,15 @@ switch {
 
 
 /* END_CUSTOM_CODE_nativeScriptApp */
+
+
+.activityIndicator StackLayout {
+    horizontal-align: center;
+    vertical-align: center;
+    color: #ffffff;
+    height: 100;
+    width: 120;
+    background-color: #ff0000;
+    border-radius: 10;
+    text-align: center;
+}

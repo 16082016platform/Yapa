@@ -1,13 +1,25 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="homeViewScreen" cssClass="screen">
-    <Page.actionBar>
-        <widgets:action-bar />
-    </Page.actionBar>
+    <GridLayout rows="*">
+        <WebView src="~/components/homeView/background/index.html" />
+        <StackLayout  verticalAlignment="middle" margin="10% 10% 0 10%">
+            <!--<Image src='~/images/yapa.png' stretch="aspectFit" margin="0 20% 10% 20%" />-->
+            <Label id="texto" text="Ingrese sus datos para verificar si tiene un crédito pre aprobado" android:fontSize="50" textWrap="true"  translateY="-400" />
+                
+            <TextField id="dni" hint="DNI" keyboardType="phone" loaded="maxLength" translateY="400" opacity="0"  propertyChange="textChange"  />
+            <Label id="validarDni" text="Ingrese un DNI de 8 dígitos" class="validar" visibility="{{validarDni?'visible':'collapsed'}}" />
+            <TextField id="telefono" hint="Teléfono" keyboardType="phone"  translateY="-400" opacity="0" propertyChange="textChange" />
+            <Label id="validarTelefono" text="Ingrese un teléfono válido" class="validar" visibility="{{validarTelefono?'visible':'collapsed'}}" />
+            <TextField id="correo" hint="Correo" keyboardType="email" autocorrect="false"  translateY="400" opacity="0"  propertyChange="textChange" />
+            <Label id="validarCorreo" text="Ingrese un correo correcto" class="validar" visibility="{{validarCorreo?'visible':'collapsed'}}" />
+            
+            <Label id="enviar" text="Enviar" tap="sendEmail" cssClass="enviar" translateY="-400" opacity="0" />
 
-    <StackLayout>
-        <!-- additional view content -->
-        <!-- START_CUSTOM_CODE_homeView -->
-        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-        <!-- END_CUSTOM_CODE_homeView -->
-    </StackLayout>
+        </StackLayout>-->
+        <GridLayout cssClass="activityIndicator" rows="*" visibility="{{isLoading ? 'visible' : 'collapsed'}}">
+            <StackLayout>
+                <ActivityIndicator busy="true"/>
+                <Label text="Cargando..." />
+            </StackLayout>
+        </GridLayout>
+    </GridLayout>
 </Page>

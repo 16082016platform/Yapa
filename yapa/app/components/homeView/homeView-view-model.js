@@ -4,9 +4,12 @@ var ViewModel,
 // additional requires
 
 ViewModel = new Observable({
-
+    isLoading: false,
     pageTitle: 'Home View',
     // additional properties
+    validarDni: false,
+    validarTelefono: false,
+    validarCorreo: false,
 });
 
 // START_CUSTOM_CODE_homeView

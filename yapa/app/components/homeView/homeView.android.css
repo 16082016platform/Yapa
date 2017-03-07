@@ -1,0 +1,31 @@
+Label {
+    font-size: 20%;
+    text-align: center;
+}
+
+TextField {
+    background-color: #2e2c76;
+    border-color: #ee1d23;
+    border-style: solid;
+    border-width: 2;
+    color: #ffffff;
+    margin: 5% 10% 0 10%;
+    font-weight: bold;
+    font-size: 40%;
+    /*text-align: center;*/
+}
+
+.validar {
+    color: #ee1d23;
+    font-weight: bold;
+    font-size: 20%;
+}
+
+.enviar {
+    margin: 5% 10% 0 10%;
+    font-size: 40%;
+    background-color: #ee1d23;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10%
+}
