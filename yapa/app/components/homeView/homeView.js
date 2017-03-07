@@ -120,7 +120,7 @@ function mensajeFail(err) {
 function onRequestSuccess(responce) {
 
     return dataService.Users.resetPassword({
-        Email: "email.letrecorp@gmail.com"
+        Email: "ks@doohsmedia.com"
     })
         .then(mensajeOK.bind(this))
         .catch(mensajeFail.bind(this));
