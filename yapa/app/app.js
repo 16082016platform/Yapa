@@ -9,3 +9,13 @@ var application = require('application'),
 application.start({
     moduleName: mainModule
 });
+
+
+/* desabilitar el back buttom*/
+var application = require('application');
+if (application.android) {
+    application.android.on(application.AndroidApplication.activityBackPressedEvent, backEvent);
+}
+function backEvent(args) {
+    args.cancel = true;
+}

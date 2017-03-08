@@ -1,18 +1,27 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="homeViewScreen" cssClass="screen">
     <GridLayout rows="*">
         <WebView src="~/components/homeView/background/index.html" />
-        <StackLayout  verticalAlignment="middle" margin="10% 10% 0 10%">
+        <StackLayout  verticalAlignment="middle" margin="20% 10% 0 10%">
             <!--<Image src='~/images/yapa.png' stretch="aspectFit" margin="0 20% 10% 20%" />-->
-            <Label id="texto" text="Ingrese sus datos para verificar si tiene un crédito pre aprobado" android:fontSize="50" textWrap="true"  translateY="-400" />
+            <Label id="texto" text="Ingrese sus datos para verificar si tiene un crédito pre aprobado" android:fontSize="50" textWrap="true" fontWeight="bold" translateY="-400" />
                 
             <TextField id="dni" hint="DNI" keyboardType="phone" loaded="maxLength" translateY="400" opacity="0"  propertyChange="textChange"  />
             <Label id="validarDni" text="Ingrese un DNI de 8 dígitos" class="validar" visibility="{{validarDni?'visible':'collapsed'}}" />
             <TextField id="telefono" hint="Teléfono" keyboardType="phone"  translateY="-400" opacity="0" propertyChange="textChange" />
             <Label id="validarTelefono" text="Ingrese un teléfono válido" class="validar" visibility="{{validarTelefono?'visible':'collapsed'}}" />
             <TextField id="correo" hint="Correo" keyboardType="email" autocorrect="false"  translateY="400" opacity="0"  propertyChange="textChange" />
-            <Label id="validarCorreo" text="Ingrese un correo correcto" class="validar" visibility="{{validarCorreo?'visible':'collapsed'}}" />
+            <Label id="validarCorreo" text="Ingrese un correo correcto" class="validar"  visibility="{{validarCorreo?'visible':'collapsed'}}" />
+
+        
+            <GridLayout rows="auto,auto" columns="*,*" id="seleccionar" translateY="-400" opacity="0" >
+                <Label row="0" col="0" colspan="2" text="Seleccione el tipo de crédito que desea" class="labelSeleccionar" />
+                <Label row="1" col="0" text="Crédito vehicular" textWrap="true" class="opcion" id="option0" tap="seleccionar0" />
+	            <Label row="1" col="1" text="Préstamos con garantía" textWrap="true" class="opcion" id="option1" tap="seleccionar1" />
+            </GridLayout>
+
             
-            <Label id="enviar" text="Enviar" tap="sendEmail" cssClass="enviar" translateY="-400" opacity="0" />
+            
+            <Label id="enviar" text="Enviar" tap="sendEmail" cssClass="enviar" translateY="400" opacity="0" />
 
         </StackLayout>-->
         <GridLayout cssClass="activityIndicator" rows="*" visibility="{{isLoading ? 'visible' : 'collapsed'}}">

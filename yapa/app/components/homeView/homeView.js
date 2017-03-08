@@ -68,6 +68,13 @@ function pageLoaded(args) {
             curve: enums.AnimationCurve.easeOut
         });
     }).then(function () {
+        return page.getViewById("seleccionar").animate({
+            opacity: 1,
+            translate: { x: 0, y: 0 },
+            duration: 400,
+            curve: enums.AnimationCurve.easeOut
+        });
+    }).then(function () {
         return page.getViewById("enviar").animate({
             opacity: 1,
             translate: { x: 0, y: 0 },
@@ -75,6 +82,10 @@ function pageLoaded(args) {
             curve: enums.AnimationCurve.easeOut
         });
     });
+
+    page.getViewById("option0").color = "#ee1d23";
+    page.getViewById("option1").color = "#cecece";
+
 
 }
 exports.pageLoaded = pageLoaded;
@@ -192,11 +203,13 @@ function animarLabel(label) {
 
 exports.sendEmail = function (args) {
     viewModel.set("isLoading", true);
+
     if (validarTextField()) {
         return dataService.Users.register(page.getViewById("correo").text, page.getViewById("dni").text, {
             Email: page.getViewById("correo").text,
             DisplayName: page.getViewById("telefono").text,
             Username: page.getViewById("dni").text,
+            credito: page.getViewById("option0").color == "#cecece" ? page.getViewById("option1").text : page.getViewById("option0").text
         })
             .then(onRequestSuccess.bind(this))
             .catch(onRequestFail.bind(this));
@@ -226,7 +239,8 @@ function limpiarTextFiled() {
 }
 
 function errores(err) {
-    // alert(JSON.stringify(err));
+    alert(JSON.stringify(err));
+    viewModel.set("isLoading", false);
     switch (err.code) {
         case 201:
             alert("Error. DNI ya registrado");
@@ -240,6 +254,12 @@ function errores(err) {
     }
 }
 
+
+var platform_1 = require("platform");
+var test;
+if (platform_1.isIOS) {
+    test = require("../../delegate/delegate_ios");
+}
 exports.maxLength = function (args) {
     var textfield = args.object;
     if (textfield.android) {
@@ -247,6 +267,14 @@ exports.maxLength = function (args) {
         var array = [];
         array[0] = new android.text.InputFilter.LengthFilter(legth);
         textfield.android.setFilters(array);
+    } else {
+        var legth = parseInt(8);
+        var uiTextView = textfield.ios;
+        let tf = textfield;
+        var newWeakRef = new WeakRef(uiTextView);
+        let newDelegate = test.newUITextFieldDelegateImpl.initWithOriginalDelegate(tf._delegate, legth);
+        uiTextView.delegate = newDelegate;
+        tf._delegate = newDelegate;
     }
 }
 
@@ -268,3 +296,17 @@ function textChange(args) {
     }
 }
 exports.textChange = textChange;
+
+
+exports.seleccionar0 = function (args) {
+    var option = args.object;
+    option.color = "#ee1d23";
+    page.getViewById("option1").color = "#cecece";
+}
+
+
+exports.seleccionar1 = function (args) {
+    var option = args.object;
+    option.color = "#ee1d23";
+    page.getViewById("option0").color = "#cecece";
+}
