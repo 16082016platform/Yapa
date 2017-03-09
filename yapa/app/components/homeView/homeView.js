@@ -12,6 +12,7 @@ var color_1 = require("color");
 var enums = require("ui/enums");
 // additional functions
 
+var http = require("http");
 
 var page;
 function pageLoaded(args) {
@@ -123,19 +124,40 @@ function mensajeOK(responce) {
         clearHistory: true,
     });
 }
-function mensajeFail(err) {
-    // alert(JSON.stringify(err));
-    errores(err);
-    return err;
-}
-function onRequestSuccess(responce) {
+function onRequestSuccess(valor) {
+    var info = ((page.getViewById("option0").color == "#cecece") ? page.getViewById("option1").text : page.getViewById("option0").text) + '<br/>Correo: ' + page.getViewById("correo").text + '<br/>Teléfono:' + page.getViewById("telefono").text + '</br>Dni:' + page.getViewById("dni").text + '</br>';
 
-    return dataService.Users.resetPassword({
-        Email: "ks@doohsmedia.com"
-    })
-        .then(mensajeOK.bind(this))
-        .catch(mensajeFail.bind(this));
+    // page.getViewById("correo").text = html;
+    // "CORREO: vemalavers@unc.edu.pe<br/>TELEFONO: 986709663<br/>DNI: 46679559<br/>Crédito vehicular"
+
+    var data = JSON.stringify({
+        "TemplateName": "NotifyAdminTemplate",
+        "Recipients": ["ks@doohsmedia.com"],
+        "Context": {
+            "NotificationSubject": "Nuevo usuario registrado en Yapa",
+            "MessageBody": info
+        }
+    });
+
+    var result;
+    http.request({
+        url: "https://api.everlive.com/v1/dmazapr96i4ocxjh/Functions/NotifyAdminTemplate",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        content: data
+    }).then(function (response) {
+        // result = response.content.toJSON();
+        // alert(JSON.stringify(result));
+        viewModel.set("isLoading", false);
+        mensajeOK();
+    }, function (e) {
+        viewModel.set("isLoading", false);
+
+        alert("Error occurred " + e);
+    });
 }
+
+
 function onRequestFail(err) {
     // alert(JSON.stringify(err));
     errores(err);
@@ -233,9 +255,9 @@ function limpiarErrores() {
 
 }
 function limpiarTextFiled() {
-    page.getViewById("dni").text = "";
-    page.getViewById("telefono").text = "";
-    page.getViewById("correo").text = "";
+    page.getViewById("dni").text = "46679559";
+    page.getViewById("telefono").text = "986709663";
+    page.getViewById("correo").text = "vemalavers@unc.edu.pe";
 }
 
 function errores(err) {
