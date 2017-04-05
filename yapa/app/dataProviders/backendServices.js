@@ -2,10 +2,8 @@ var provider,
     TelerikBackendServices = require('../everlive/everlive.all.min');
 
 provider = new TelerikBackendServices({
-
     offlineStorage: true,
-
-    appId: 'dmazapr96i4ocxjh',
+    appId: 'qpxfu6xj9h2hd3d4',
     scheme: 'https'
 });
 

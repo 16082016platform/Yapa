@@ -1,0 +1,157 @@
+ <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" navigatedTo="navigatedTo" id="productosModelDetailsScreen" cssClass="screen">
+    <Page.actionBar>
+        <widgets:action-bar />
+    </Page.actionBar>
+    
+        <GridLayout rows="*">
+            <StackLayout>
+                <!--<GridLayout height="100%" cssClass="activityIndicator" rows="*" visibility="{{isLoading ? 'visible' : 'collapsed'}}">
+                    <StackLayout>
+                        <ActivityIndicator busy="true"/>
+                        <Label text="Cargando..." />
+                    </StackLayout>
+                </GridLayout>-->
+                <GridLayout cssClass="headder" height="7%" columns="*,*,*">
+                    <StackLayout col="0">
+                        <Image src="~/images/back.png" tap="buttonBackTap"/>
+                    </StackLayout>
+                    <StackLayout col="1">
+                        <!--<Label text="Solicitar Prueba" cssClass="solicitarProducto" textWrap="true" tap="selectSolicitar" />-->
+                    </StackLayout>
+                    <StackLayout col="2">
+                        <Image src="~/images/logo.png" tap="buttonBackTap"/>
+                    </StackLayout>
+                </GridLayout>
+                
+                <ScrollView height="73%">
+                    <StackLayout>
+                        <GridLayout columns="auto,*">
+                            <GridLayout col="0" rows="*,*" cssClass="contenedor1" tap="showModal">
+                                <Image row="0" src="~/images/ribbon-new.png"  stretch ="aspectFill"  horizontalAlignment="left" cssClass="nuevo" visibility="{{ nuevo?'visible':'collapsed'}}" />
+                                <StackLayout row="1">
+                                    <Image  src="{{ imagen }}" id="imagen" stretch="aspectFill"   loadMode="async" cssClass="imagen"/>
+                                </StackLayout>
+                                <StackLayout row="1">
+                                    <Image src="~/images/ribbon-promo.png"  stretch="aspectFill"  horizontalAlignment="left" cssClass="solooline" visibility="{{ soloonline?'visible':'collapsed'}}"/>
+                                </StackLayout>
+                                <StackLayout row="1">
+                                    <Image src="~/images/ribbon-4g.png"  stretch="aspectFill"  horizontalAlignment="left" cssClass="lte4g" visibility="{{ lte4g?'visible':'collapsed'}}"/>
+                                </StackLayout>
+                            </GridLayout>
+
+                            
+                            <StackLayout col="1" cssClass="contenedor2" >
+                                <Label text="{{ marcaExpand }}" cssClass="marcaProducto"/>                          
+                                <Label text="{{ modelo }}" cssClass="modeloProducto"/>
+                                <Label text="{{ 'S/ ' + precio }}" cssClass="precio" visibility="{{ precionormal>0?'collapsed':'visible'}}" />
+                                <GridLayout columns="*,*" visibility="{{ precionormal>0?'visible':'collapsed'}}">
+                                    <Label id="precioEquipo" col="0" text="{{ 'S/ ' + precio }}" cssClass="precio" horizontalAlignment="right"/>
+                                    <Label col="1" text="{{ 'S/ ' + precionormal }}" cssClass="precionormal" horizontalAlignment="left"/>
+                                </GridLayout>
+                                <Label text="Precio promocional" cssClass="promocion" textWrap="true" />
+                                <Label id="etiquetaEquipo" text="{{ etiqueta }}" cssClass="etiqueta" textWrap="true" />
+                                <Label text="{{ descripcion }}" cssClass="descripcion"  textWrap="true" />
+                                
+                            </StackLayout>    
+                            
+                        </GridLayout>   
+        
+                        <Label text="Especificaciones técnicas" cssClass="especificaciones" />
+
+                        <GridLayout columns="*,*,*,*,*,*" cssClass="contenedor3">                     
+                            <StackLayout col="0">
+                                <Image src="~/images/especificaciones/pantalla.png" horizontalAlignment="center" stretch ="aspectFill" />
+                                <Label text="Pantalla" textWrap="true"/>
+                                <Label text='5"' />
+                            </StackLayout>
+                            <StackLayout col="1">
+                                <Image src="~/images/especificaciones/camara.png" horizontalAlignment="center" stretch ="aspectFill" />
+                                <Label text="Cámara de fotos principal" textWrap="true"/>
+                                <Label text='13MP' />
+                            </StackLayout>
+                            <StackLayout col="2">
+                                <Image src="~/images/especificaciones/camara.png" horizontalAlignment="center" stretch ="aspectFill" />
+                                <Label text="Cámara de fotos frontal" textWrap="true" />
+                                <Label text='8MP' />
+                            </StackLayout>
+                            <StackLayout col="3">
+                                <Image src="~/images/especificaciones/procesador.png" horizontalAlignment="center" stretch ="aspectFill" />
+                                <Label text="Procesador" textWrap="true"/>
+                                <Label text='Quad Core 1.1 GHz' textWrap="true" />
+                            </StackLayout>
+                            <StackLayout col="4">
+                                <Image src="~/images/especificaciones/memoriainterna.png" horizontalAlignment="center" stretch ="aspectFill" />
+                                <Label text="Memoria interna" textWrap="true"/>
+                                <Label text='16G*' />
+                            </StackLayout>
+                            <StackLayout col="5">
+                                <Image src="~/images/especificaciones/android.png" horizontalAlignment="center" stretch ="aspectFill" />
+                                <Label text="Sistema operativo" textWrap="true"/>
+                                <Label text='{{nombre}}' />   
+                            </StackLayout>
+
+                        </GridLayout>  
+
+                        <Label  text="Planes" cssClass="especificaciones" />
+
+                        <Repeater id="planes">
+                            <Repeater.itemsLayout>
+                                <WrapLayout />
+                            </Repeater.itemsLayout>
+                            <Repeater.itemTemplate>
+                                <StackLayout id="{{ 'contenedor4-' + $value }}" cssClass="{{$value==0?'contenedor4-selected':'contenedor4'}}" tap="onListViewItemTap" index="{{ $value }}"  >
+                                    <Label id="{{'nombrePlan'+$value}}" cssClass="nombreplan" textWrap="true"/>
+                                    <Label text="Precio del plan" cssClass="labelplan" textWrap="true"/>
+                                    <Label id="{{'precioPlan'+$value}}" cssClass="precioplan" textWrap="true"/>   
+                                    <GridLayout columns="*,*" rows="auto,auto,auto,auto" >
+                                        <Label col="0" row="0" id="{{'minutosPlan'+$value}}" cssClass="minutosplan" horizontalAlignment="center"/>
+                                        <Label col="0" row="1" text="Minutos" cssClass="labelminutosplan" horizontalAlignment="center"/>
+                                        <Label col="0" row="2" id="{{'megasPlan'+$value}}" cssClass="megasplan" horizontalAlignment="center"/>
+                                        <Label col="0" row="3" text="Internet" cssClass="labelmegasplan" horizontalAlignment="center"/>
+
+                                        <Label col="1" row="0" id="{{'lineaPlan'+$value}}" cssClass="lineaplan" horizontalAlignment="center"/>
+                                        <Label col="1" row="1" text="RPC" cssClass="labellineaplan" horizontalAlignment="center"/>
+                                        <Label col="1" row="2" id="{{'mensajesPlan'+$value}}" cssClass="mensajesplan" horizontalAlignment="center"/>
+                                        <Label col="1" row="3" text="SMS" cssClass="labelmensajesplan" horizontalAlignment="center"/>
+                                    </GridLayout>           
+                                </StackLayout>
+                            </Repeater.itemTemplate>
+                        </Repeater>
+                    </StackLayout>
+                </ScrollView>
+                
+                <GridLayout id="footer" cssClass="footer" height="20%" columns="*,*,*" rows="auto,auto">
+                    <StackLayout row="0" colSpan="3"> 
+                        <Label text="¿Desea recibir más promociones de otros equipos?" cssClass="pregunta" textWrap="true" />
+                        <StackLayout orientation="horizontal" horizontalAlignment="center" > 
+                            <Image src="~/images/finger.png"  cssClass="finger" />
+                            <TextField id="telefono" hint="Número celular" text="" keyboardType="phone" cssClass="telefono" loaded="maxLength" />
+                            <Label text="Enviar" cssClass="button" tap="sendEmail" />
+                        </StackLayout>                
+                    </StackLayout>
+                    <StackLayout row="1" col="0">
+                        <!--<Image src="~/images/shopping-bag.png" tap="buttonBackTap" visibility="collapsed"/>-->
+                    </StackLayout>
+                    <StackLayout row="1" col="1">
+                        <!--<Image src="~/images/back.png" tap="buttonBackTap"/>-->
+                    </StackLayout>
+                    <StackLayout row="1" col="2">
+                        <!--<Label text="Solicitar Prueba" cssClass="solicitarProducto" textWrap="true" tap="selectSolicitar" />-->
+                    </StackLayout>
+                </GridLayout>
+
+            </StackLayout>
+
+            <GridLayout id="bgModal" opacity="0.7" style.backgroundColor="#000000"  tap="hideModal" visibility="collapsed" >
+            </GridLayout>
+            <GridLayout id="contentModal" verticalAlignment="middle" visibility="collapsed" horizontalAlignment="center" tap="tapVacio" >
+                <GridLayout columns="*,6*,*" id="modal" height="50%" width="60%" verticalAlignment="middle" horizontalAlignment="center">
+                    <Image  col="0" src="~/images/arrow-left.png" stretch="none"   loadMode="async" verticalAlignment="middle" horizontalAlignment="center" tap="camiarImagen" />
+                    <Image  col="1" src="{{ imagen }}" id="imagen"  loadMode="async" verticalAlignment="middle" horizontalAlignment="center" tap="camiarImagen" />
+                    <Image  col="2" src="~/images/arrow-right.png" stretch="none"   loadMode="async" verticalAlignment="middle" horizontalAlignment="center" tap="camiarImagen" />
+                </GridLayout>
+            </GridLayout>
+
+        </GridLayout>
+    
+</Page>

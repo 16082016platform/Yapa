@@ -7,7 +7,6 @@ var isInit = true,
 
 var frameModule = require("ui/frame");
 var imageModule = require("ui/image");
-var dataService = require('../../dataProviders/backendServices');
 var color_1 = require("color");
 var enums = require("ui/enums");
 // additional functions
@@ -35,11 +34,6 @@ function pageLoaded(args) {
     }
 
     viewModel.set("isLoading", false);
-    // Create the parallax background effect by scaling the background image
-    // page.getViewById("backgroundParallax").animate({
-    //     scale: { x: 1, y: 1 },
-    //     duration: 8000
-    // });
 
     limpiarTextFiled();
     page.getViewById("texto").animate({
@@ -132,7 +126,7 @@ function onRequestSuccess(valor) {
 
     var data = JSON.stringify({
         "TemplateName": "NotifyAdminTemplate",
-        "Recipients": ["ks@doohsmedia.com"],
+        "Recipients": ["vmalaver@doohsdigital.com"],
         "Context": {
             "NotificationSubject": "Nuevo usuario registrado en Yapa",
             "MessageBody": info
@@ -141,7 +135,7 @@ function onRequestSuccess(valor) {
 
     var result;
     http.request({
-        url: "https://api.everlive.com/v1/dmazapr96i4ocxjh/Functions/NotifyAdminTemplate",
+        url: "https://api.everlive.com/v1/qpxfu6xj9h2hd3d4/Functions/NotifyAdminTemplate",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         content: data
@@ -227,14 +221,49 @@ exports.sendEmail = function (args) {
     viewModel.set("isLoading", true);
 
     if (validarTextField()) {
-        return dataService.Users.register(page.getViewById("correo").text, page.getViewById("dni").text, {
-            Email: page.getViewById("correo").text,
-            DisplayName: page.getViewById("telefono").text,
-            Username: page.getViewById("dni").text,
-            credito: page.getViewById("option0").color == "#cecece" ? page.getViewById("option1").text : page.getViewById("option0").text
-        })
-            .then(onRequestSuccess.bind(this))
-            .catch(onRequestFail.bind(this));
+        var tienda = new Array(6);
+        tienda[0] = "067334a0-0b1d-11e7-b200-bbf17e89428c";
+        tienda[1] = "01cd5340-0b1d-11e7-ac2a-ed032b886c01";
+        tienda[2] = "f6f54b30-0b1c-11e7-a2db-17761183e30d";
+        tienda[3] = "ef7ce8e0-0b1c-11e7-bff3-eba5aca004cc";
+        tienda[4] = "e75c5fb0-0b1c-11e7-ac2a-ed032b886c01";
+        tienda[5] = "55163cc0-0b1c-11e7-ac2a-ed032b886c01";
+
+        var i = Math.floor(Math.random() * 5) + 0;
+
+
+        // return dataService.Users.register(page.getViewById("correo").text, page.getViewById("dni").text, {
+        //     Email: page.getViewById("correo").text,
+        //     DisplayName: page.getViewById("telefono").text,
+        //     Username: page.getViewById("dni").text,
+        //     credito: page.getViewById("option0").color == "#cecece" ? page.getViewById("option1").text : page.getViewById("option0").text,
+        //     tienda: tienda[i],
+        // })
+        //     .then(onRequestSuccess.bind(this))
+        //     .catch(onRequestFail.bind(this));
+
+        var solicitud = JSON.stringify({
+            "numerodocumento": page.getViewById("dni").text,
+            "tipodocumento": "tipoDioc",
+            "credito": page.getViewById("option0").color == "#cecece" ? page.getViewById("option1").text : page.getViewById("option0").text,
+            "tienda": tienda[i],
+            "punto": "1",
+            "correo": page.getViewById("correo").text,
+            "telefono": page.getViewById("telefono").text
+        });
+
+        var result;
+        http.request({
+            url: "https://api.everlive.com/v1/qpxfu6xj9h2hd3d4/solicitudes",
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            content: solicitud
+        }).then(function (response) {
+            onRequestSuccess();
+        }, function (e) {
+            onRequestFail(e);
+        });
+
     } else {
         viewModel.set("isLoading", false);
     }
@@ -255,9 +284,9 @@ function limpiarErrores() {
 
 }
 function limpiarTextFiled() {
-    page.getViewById("dni").text = "46679559";
-    page.getViewById("telefono").text = "986709663";
-    page.getViewById("correo").text = "vemalavers@unc.edu.pe";
+    page.getViewById("dni").text = "";
+    page.getViewById("telefono").text = "";
+    page.getViewById("correo").text = "";
 }
 
 function errores(err) {

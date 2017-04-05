@@ -9,7 +9,7 @@
             <Label id="validarDni" text="Ingrese un DNI de 8 dígitos" class="validar" visibility="{{validarDni?'visible':'collapsed'}}" />
             <TextField id="telefono" hint="Teléfono" keyboardType="phone"  translateY="-400" opacity="0" propertyChange="textChange" />
             <Label id="validarTelefono" text="Ingrese un teléfono válido" class="validar" visibility="{{validarTelefono?'visible':'collapsed'}}" />
-            <TextField id="correo" hint="Correo" keyboardType="email" autocorrect="false"  translateY="400" opacity="0"  propertyChange="textChange" />
+            <TextField id="correo" hint="Correo" keyboardType="email" autocorrect="false" autocapitalizationType="none" translateY="400" opacity="0"  propertyChange="textChange" />
             <Label id="validarCorreo" text="Ingrese un correo correcto" class="validar"  visibility="{{validarCorreo?'visible':'collapsed'}}" />
 
         
@@ -19,8 +19,6 @@
 	            <Label row="1" col="1" text="Préstamos con garantía" textWrap="true" class="opcion" id="option1" tap="seleccionar1" />
             </GridLayout>
 
-            
-            
             <Label id="enviar" text="Enviar" tap="sendEmail" cssClass="enviar" translateY="400" opacity="0" />
 
         </StackLayout>-->

@@ -19,6 +19,30 @@ TextField {
     text-align: center;
 }
 
+
+/*#seleccionar {
+    margin: 5% 0 0 0;
+}
+
+#seleccionar .labelSeleccionar {
+    font-weight: bold;
+    font-size: 20%;
+}*/
+
+#seleccionar .opcion {
+    background-color: #2e2c76;
+    border-color: #ee1d23;
+    border-style: solid;
+    border-width: 2;
+    color: #ffffff;
+    /*margin: 5% 10% 0 10%;*/
+    font-weight: bold;
+    /*font-size: 40%;*/
+}
+
+
+
+
 .validar {
     color: #ee1d23;
 }
@@ -29,3 +53,5 @@ TextField {
     background-color: #ee1d23;
     color: #ffffff;
 }
+
+

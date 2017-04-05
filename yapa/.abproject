@@ -2,10 +2,10 @@
   "ProjectName": "yapa",
   "ProjectGuid": "7e47f253-d0f1-4aad-babe-f0c0b1423916",
   "projectVersion": 1,
-  "AppIdentifier": "com.telerik.Yapa",
-  "DisplayName": "Yapa",
+  "AppIdentifier": "com.telerik.YapaCliente",
+  "DisplayName": "YapaCliente",
   "Author": "Letrecorp ",
-  "Description": "Yapa",
+  "Description": "YapaCliente",
   "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
